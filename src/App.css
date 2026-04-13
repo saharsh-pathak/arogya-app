@@ -182,3 +182,73 @@
     border-right-color: var(--border);
   }
 }
+
+/* =========================================
+   Responsive Overrides for Laptop View
+========================================= */
+
+/* Main App Wrapper */
+.app-container {
+  max-width: 1200px !important;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav-container {
+  max-width: 1200px !important;
+}
+
+/* Responsive Grids */
+.resp-grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* 2 columns on mobile, 4 on desktop (AI Actions, etc) */
+.resp-grid-2-to-4 {
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 768px) {
+  .resp-grid-2-to-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* 1 column on mobile, 2 or 3 on desktop (Doctors List) */
+.resp-grid-1-to-2 {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .resp-grid-1-to-2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    align-items: start;
+    gap: 16px;
+  }
+}
+
+/* 4 columns on mobile, 8 on desktop (Specialties) */
+.resp-grid-4-to-8 {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (min-width: 768px) {
+  .resp-grid-4-to-8 {
+    grid-template-columns: repeat(8, 1fr) !important;
+  }
+}
+
+/* Vitals Tracker Layout */
+.resp-grid-2-to-4-vitals {
+  grid-template-columns: 1fr 1fr;
+}
+@media (min-width: 768px) {
+  .resp-grid-2-to-4-vitals {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* AI Quick Actions Specific Layout */
+.ai-actions-desktop {
+  margin-bottom: 24px;
+}
+

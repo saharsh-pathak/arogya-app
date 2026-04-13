@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import "./App.css";
 
 const DOCTORS = [
   { id:1, name:"Dr. Priya Sharma", specialty:"Dermatologist", clinic:"SkinCare Clinic", location:"Connaught Place", rating:4.9, reviews:312, fee:800, exp:12, slots:["10:00 AM","11:30 AM","2:00 PM","4:30 PM"], av:"PS", clr:"#0d3326", ac:"#00c87a", verified:true, next:"Today", punctuality:96, queue:3, mode:["clinic","video"] },
@@ -48,7 +49,7 @@ const MEDICINES = {
 const C = { bg:"#060d0a", surf:"#0c1812", card:"#111f18", card2:"#162920", border:"#1e3228", primary:"#00c87a", gold:"#f0b429", text:"#dff2ea", muted:"#5a7a6a", dim:"#8aac9a" };
 
 const s = {
-  page:  { background:C.bg, minHeight:"100vh", maxWidth:430, margin:"0 auto", fontFamily:"'DM Sans','Segoe UI',sans-serif", color:C.text, position:"relative", overflowX:"hidden" },
+  page:  { background:C.bg, minHeight:"100vh", maxWidth:1200, width:"100%", margin:"0 auto", fontFamily:"'DM Sans','Segoe UI',sans-serif", color:C.text, position:"relative", overflowX:"hidden" },
   card:  { background:C.card,  borderRadius:20, border:`1px solid ${C.border}` },
   card2: { background:C.card2, borderRadius:20, border:`1px solid ${C.border}` },
   h1:    { fontFamily:"'Syne',sans-serif", fontWeight:900, color:"#fff" },
@@ -82,7 +83,7 @@ function Nav({ tab, setTab }) {
     { id:"profile", icon:"👤", label:"Profile" },
   ];
   return (
-    <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:430, background:C.surf, borderTop:`1px solid ${C.border}`, display:"flex", justifyContent:"space-around", padding:"10px 0 16px", zIndex:100 }}>
+    <div style={{ position:"fixed", bottom:0, left:"50%", transform:"translateX(-50%)", width:"100%", maxWidth:1200, background:C.surf, borderTop:`1px solid ${C.border}`, display:"flex", justifyContent:"space-around", padding:"10px 0 16px", zIndex:100 }}>
       {items.map(n => (
         <div key={n.id} onClick={() => setTab(n.id)} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:3, cursor:"pointer", padding:"5px 12px", borderRadius:12, background:tab===n.id?"#00c87a15":"transparent" }}>
           <span style={{ fontSize:20 }}>{n.icon}</span>
@@ -428,7 +429,7 @@ export default function Arogya() {
           </div>
         </div>
         <div style={{ ...s.lbl, marginBottom:10 }}>All Vitals</div>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+        <div className="resp-grid resp-grid-2-to-4-vitals" style={{ display:"grid", gap:10 }}>
           {VITALS.map((v,i) => (
             <div key={i} onClick={() => setActiveV(i)} style={{ ...s.card, padding:18, cursor:"pointer", borderColor:activeV===i?C.primary+"44":C.border }}>
               <div style={{ fontSize:24, marginBottom:8 }}>{v.icon}</div>
@@ -539,7 +540,7 @@ export default function Arogya() {
 
             {/* AI Quick Actions */}
             <div style={{ ...s.lbl, marginBottom:10 }}>⚡ AI Quick Actions</div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:16 }}>
+            <div className="resp-grid resp-grid-2-to-4" style={{ display:"grid", gap:10, marginBottom:16 }}>
               {[
                 { icon:"🤒", title:"Symptom Checker", sub:"AI → right doctor", bg:"#0d2e1e", ac:C.primary, action:()=>setScreen("ai-symptom") },
                 { icon:"💊", title:"Medicine Prices", sub:"Best deals nearby", bg:"#2a1a00", ac:C.gold, action:()=>setScreen("ai-medicine") },
@@ -556,7 +557,7 @@ export default function Arogya() {
 
             {/* Specialties */}
             <div style={{ ...s.lbl, marginBottom:10 }}>Find by Specialty</div>
-            <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:8, marginBottom:16 }}>
+            <div className="resp-grid resp-grid-4-to-8" style={{ display:"grid", gap:8, marginBottom:16 }}>
               {[{n:"Skin",i:"🧴",sp:"Dermatologist"},{n:"Dental",i:"🦷",sp:"Dentist"},{n:"Heart",i:"❤️",sp:"Cardiologist"},{n:"Bones",i:"🦴",sp:"Orthopedic"},{n:"Child",i:"👶",sp:"Pediatrician"},{n:"Brain",i:"🧠",sp:"Neurologist"},{n:"Eyes",i:"👁️",sp:null},{n:"All",i:"➕",sp:"All"}].map((sp,i) => (
                 <div key={i} onClick={() => { if(sp.sp){ setSpec(sp.sp==="All"?"All":sp.sp); setTab("doctors"); } }} style={{ ...s.card, padding:"12px 6px", textAlign:"center", cursor:"pointer" }}>
                   <div style={{ fontSize:20, marginBottom:5 }}>{sp.i}</div>
@@ -606,6 +607,7 @@ export default function Arogya() {
           </div>
           <div style={{ padding:"14px 18px 90px", overflowY:"auto", maxHeight:"calc(100vh - 200px)" }}>
             <div style={{ color:C.muted, fontSize:13, marginBottom:14 }}>{filtered.length} doctors found</div>
+            <div className="resp-grid-1-to-2">
             {filtered.map(doc => (
               <div key={doc.id} style={{ ...s.card, padding:18, marginBottom:12, cursor:"pointer" }} onClick={() => goDoc(doc)}>
                 <div style={{ display:"flex", gap:14 }}>
@@ -636,6 +638,7 @@ export default function Arogya() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       )}
